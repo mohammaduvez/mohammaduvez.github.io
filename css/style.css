@@ -57,6 +57,9 @@ works{
 .facebook{
    color: blue !important;
 }
+.freecodecamp{
+   color: green!important;
+}
 .facebook:hover .fa-square-o,
 .facebook .fa-square {
     display: none;
@@ -76,5 +79,12 @@ works{
     display: none;
 }
 .github:hover .fa-square {
+    display: inline;
+}
+.freecodecamp:hover .fa-square-o,
+.freecodecamp .fa-square {
+    display: none;
+}
+.freecodecamp:hover .fa-square {
     display: inline;
 }

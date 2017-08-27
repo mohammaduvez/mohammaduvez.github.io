@@ -9,14 +9,17 @@ $('a[href*="#"]').not('[href="#"]').not('[href="#0"]').click(function(event) {
         if (target.length) {
             $('ul.nav > li').removeClass('active');
             switch(this.hash.substr(1)){
-                case "about":
+                case "home":
                     $( "ul.nav li:nth-child(1)" ).addClass('active');
                     break;
-                case "work":
+                case "about":
                     $( "ul.nav li:nth-child(2)" ).addClass('active');
                     break;
-                case "contact":
+                case "work":
                     $( "ul.nav li:nth-child(3)" ).addClass('active');
+                    break;
+                case "contact":
+                    $( "ul.nav li:nth-child(4)" ).addClass('active');
                     break;
             }
             event.preventDefault();
@@ -41,7 +44,7 @@ $('ul.nav > li').click(function (e) {
     $(this).addClass('active');
 });
 
-$(".fa-facebook, .fa-github, .fa-linkedin").hover(function(){
+$(".fa-facebook, .fa-github, .fa-linkedin, .fa-free-code-camp").hover(function(){
     $(this).toggleClass("fa-inverse");
 })
 
