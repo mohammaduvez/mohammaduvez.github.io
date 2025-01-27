@@ -1,56 +1,43 @@
-$('a[href*="#"]').not('[href="#"]').not('[href="#0"]').click(function(event) {
-    if (
-      location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') 
-      && 
-      location.hostname == this.hostname
-    ) {
-        var target = $(this.hash);
-        target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
-        if (target.length) {
-            $('ul.nav > li').removeClass('active');
-            switch(this.hash.substr(1)){
-                case "home":
-                    $( "ul.nav li:nth-child(1)" ).addClass('active');
-                    break;
-                case "about":
-                    $( "ul.nav li:nth-child(2)" ).addClass('active');
-                    break;
-                case "work":
-                    $( "ul.nav li:nth-child(3)" ).addClass('active');
-                    break;
-                case "contact":
-                    $( "ul.nav li:nth-child(4)" ).addClass('active');
-                    break;
-            }
-            event.preventDefault();
-            $('html, body').animate({
-                scrollTop: target.offset().top
-            }, 1000, function() {
-                var $target = $(target);
-                $target.focus();
-                if ($target.is(":focus")) {
-                    return false;
-                } else {
-                    $target.attr('tabindex','-1');
-                    $target.focus();
-                };
-            });
-        }
+function removeAllChildren(element) {
+    while (element.firstChild) {
+        element.firstChild.remove();
     }
-});
+}
 
-$('ul.nav > li').click(function (e) {
-    $('ul.nav > li').removeClass('active');
-    $(this).addClass('active');
-});
+function loadRepositories() {
+    const user = window.location.hostname.split(".")[0];
+    const repositoriesElement = document.getElementById("repositories");
+    removeAllChildren(repositoriesElement);
+    const loadingElement = document.createElement("h5");
+    loadingElement.textContent = "Loading…";
+    repositoriesElement.appendChild(loadingElement);
+    fetch(`https://api.github.com/users/${user}/repos`)
+        .then((response) => response.json())
+        .then((data) => {
+            removeAllChildren(repositoriesElement);
+            const olElement = document.createElement("ol");
+            for (const repo of data) {
+                const liElement = document.createElement("li");
+                const aElement = document.createElement("a");
+                aElement.href = repo.html_url;
+                aElement.target = "_blank";
+                aElement.innerText = repo.name;
+                liElement.appendChild(aElement);
+                olElement.appendChild(liElement);
+            }
+            repositoriesElement.appendChild(olElement);
+        })
+        .catch((err) => {
+            removeAllChildren(repositoriesElement);
+            const errorMessageElement = document.createElement("h5");
+            errorMessageElement.textContent = err.message;
+            errorMessageElement.style.color = "Red";
+            repositoriesElement.appendChild(errorMessageElement);
+            const retryButtonElement = document.createElement("button");
+            retryButtonElement.textContent = "Retry";
+            retryButtonElement.onclick = loadRepositories;
+            repositoriesElement.appendChild(retryButtonElement);
+        });
+}
 
-$(".fa-facebook, .fa-github, .fa-linkedin, .fa-free-code-camp").hover(function(){
-    $(this).toggleClass("fa-inverse");
-})
-
-$(document).ready(function(){
-    var navH = $("#navbar").height();
-    $("body>div").each(function(){
-        $(this).css("padding-top", navH);
-    })
-});
+document.addEventListener("DOMContentLoaded", loadRepositories);

@@ -1,90 +1,15 @@
-.home{
-    background-color: lavender;
-}
-.about{
-    background-color: lightyellow;
-}
-.work{
-    background-color: linen;
-}
-.contact{
-    background-color: wheat;
-}
-.jumbotron {
-    color: azure;
-    background-color: orangered !important;
-}
-.well{
-    background-color: lightcyan;
-}
-.navbar-brand {
-    padding: 0px;
-}
-.navbar-brand>img {
-    height: 100%;
-    padding: 5px;
-    width: auto;
-    border: 2px solid lightgreen;
-    border-radius: 20%;
-    background-color: aliceblue;
-}
-.navbar-brand>img:hover{
-   background-color: powderblue; 
-}
-.nameImg{
-    margin-top: 15%;
-}
-.tags > li{
-    margin: 1px;
-    border: 1px solid blue;
-    border-radius: 5px;
-}
-works{
-    height: 260px;
-    text-align: center;
-}
-.work img{
-    max-height: 100%;
-    max-width: 100%;
+.container {
+    padding: 16px;
 }
 
-.linkedin{
-    color: aqua !important;
+@media (min-width:600px) {
+    .container {
+        padding: 32px;
+    }
 }
-.github{
-    color: black !important;
-}
-.facebook{
-   color: blue !important;
-}
-.freecodecamp{
-   color: green!important;
-}
-.facebook:hover .fa-square-o,
-.facebook .fa-square {
-    display: none;
-}
-.facebook:hover .fa-square {
-    display: inline;
-}
-.linkedin:hover .fa-square-o,
-.linkedin .fa-square {
-    display: none;
-}
-.linkedin:hover .fa-square {
-    display: inline;
-}
-.github:hover .fa-square-o,
-.github .fa-square {
-    display: none;
-}
-.github:hover .fa-square {
-    display: inline;
-}
-.freecodecamp:hover .fa-square-o,
-.freecodecamp .fa-square {
-    display: none;
-}
-.freecodecamp:hover .fa-square {
-    display: inline;
+
+@media (min-width:900px) {
+    .container {
+        padding: 64px;
+    }
 }
